@@ -45,12 +45,16 @@ const Player = () => {
     }
     useEffect(() => {
         fetchData();
-    },[myMusic]);
-    const switchMusic = (e) => {
+    });
+
+    const switchMusic = (item, index) => {
         if (myMusic) pauseMusicHandler();
-        let mus = e.target.dataset.url;
-        let ind = Number(e.target.dataset.index);
-        let name = e.target.dataset.name;
+        // let mus = e.target.dataset.url;
+        // let ind = Number(e.target.dataset.index);
+        // let name = e.target.dataset.name;
+        let mus = item.url;
+        let ind = index;
+        let name = item.name;
         let url = "https://assets.breatheco.de/apis/sound/"+mus;
         setMymusic(new Audio(url));
         setMyMusicName(name);
@@ -238,10 +242,10 @@ const Player = () => {
                                 <li 
                                     key={index} 
                                     className="list-group-item list-group-item-action notWorking" 
-                                    onClick={switchMusic} 
-                                    data-url={item.url} 
-                                    data-name={item.name}
-                                    data-index={index}
+                                    onClick={() => {switchMusic(item, index)}} 
+                                    // data-url={item.url} 
+                                    // data-name={item.name}
+                                    // data-index={index}
                                 >
                                     {index+1} - {item.name}
                                 </li>
